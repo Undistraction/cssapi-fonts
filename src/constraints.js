@@ -8,7 +8,7 @@ import {
   validateIsWhitelistedString,
   validateIsObject,
 } from 'folktale-validations';
-import { VALID_WEIGHT_VALUES, VALID_WEIGHT_VALUES_PUBLIC } from './const';
+import { VALID_WEIGHT_VALUES, VALID_STYLE_VALUES } from './const';
 
 export default {
   fields: [
@@ -19,7 +19,7 @@ export default {
       children: {
         fields: [
           {
-            name: `fontFamily`,
+            name: `family`,
             isRequired: true,
             validator: validateIsString,
           },
@@ -41,10 +41,7 @@ export default {
               fields: [
                 {
                   name: `name`,
-                  isRequired: true,
-                  validator: validateIsWhitelistedString(
-                    VALID_WEIGHT_VALUES_PUBLIC
-                  ),
+                  validator: validateIsString,
                 },
                 {
                   name: `weight`,
@@ -54,7 +51,22 @@ export default {
                 {
                   name: `styles`,
                   isRequired: true,
-                  validator: validateIsArrayOf(validateIsString),
+                  validator: validateIsArrayOf(validateIsObject),
+                  children: {
+                    fields: [
+                      {
+                        name: `name`,
+                        validator: validateIsString,
+                      },
+                      {
+                        name: `style`,
+                        isRequired: true,
+                        validator: validateIsWhitelistedString(
+                          VALID_STYLE_VALUES
+                        ),
+                      },
+                    ],
+                  },
                 },
               ],
             },

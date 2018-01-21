@@ -7,8 +7,8 @@ import { propValue } from './utils';
 
 const throwOrBuildApi = config =>
   validateConfig(config).matchWith({
-    Success: validation => api(validation.value),
-    Failure: ({ value }) => throwError(invalidConfigMessage(value)),
+    Success: compose(api, propValue),
+    Failure: compose(throwError, invalidConfigMessage, propValue),
   });
 
 const configure = config =>

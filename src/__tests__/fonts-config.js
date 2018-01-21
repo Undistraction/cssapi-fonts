@@ -1,16 +1,8 @@
 import { map } from 'ramda';
+import { isObject } from 'ramda-adjunct';
 import fonts from '../index';
 import { notObject } from './testHelpers/fixtures';
-import { isFunction, isObject } from 'ramda-adjunct';
-import {
-  VALID_WEIGHT_VALUES_PUBLIC,
-  VALID_STRING_WEIGHTS,
-  VALID_STYLE_VALUES_PUBLIC,
-  VALID_STYLE_VALUES,
-  FONT_WEIGHTS,
-  FONT_STYLES,
-  VALID_STYLES,
-} from '../const';
+import { VALID_STRING_WEIGHTS, VALID_STYLES } from '../const';
 
 describe(`configuration rhythm()`, () => {
   describe(`with no config`, () => {
@@ -44,10 +36,10 @@ describe(`configuration rhythm()`, () => {
     describe(`with invalid config param values`, () => {
       it(`throws`, () => {
         const value = {
-          fonts: [{ fontFamily: [], fallbacks: `x`, weights: [] }],
+          fonts: [{ family: [], fallbacks: `x`, weights: [] }],
         };
         expect(() => fonts.configure(value)).toThrow(
-          `The config object was invalid: Object Invalid: for field 'fonts': Object included invalid values(s): Key 'fontFamily': Wasn't type: 'String', Key 'fallbacks': Wasn't type: 'Array', Key 'weights': Was Empty`
+          `The config object was invalid: Object Invalid: for field 'fonts': Object included invalid values(s): Key 'family': Wasn't type: 'String', Key 'fallbacks': Wasn't type: 'Array', Key 'weights': Was Empty`
         );
       });
     });
@@ -58,19 +50,30 @@ describe(`configuration rhythm()`, () => {
       const value = {
         fonts: [
           {
-            fontFamily: `a`,
+            family: `a`,
             fallbacks: [`b`, `c`],
             baselineOffset: 0.01,
             weights: [
               {
-                name: FONT_WEIGHTS.book,
                 weight: VALID_STRING_WEIGHTS.normal,
-                styles: [VALID_STYLES.normal, VALID_STYLES.italic],
+                styles: [
+                  { style: VALID_STYLES.normal },
+                  { style: VALID_STYLES.italic },
+                ],
               },
               {
-                name: FONT_WEIGHTS.bold,
+                name: `e`, // Names are optional
                 weight: VALID_STRING_WEIGHTS.bold,
-                styles: [VALID_STYLES.normal, VALID_STYLES.italic],
+                styles: [
+                  {
+                    name: `f`, // Names are optional
+                    style: VALID_STYLES.normal,
+                  },
+                  {
+                    name: `g`, // Names are optional
+                    style: VALID_STYLES.italic,
+                  },
+                ],
               },
             ],
           },

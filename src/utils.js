@@ -7,12 +7,11 @@ import {
   tap,
   equals,
   complement,
-  values,
   contains,
   prop,
 } from 'ramda';
 
-import { FONT_WEIGHTS, FONT_STYLES } from './const';
+import { VALID_WEIGHT_VALUES, VALID_STYLE_VALUES } from './const';
 
 const log = curry((loggingFunction, prefix) =>
   tap(
@@ -26,10 +25,7 @@ export const isNotZero = complement(isZero);
 // eslint-disable-next-line no-console
 export const logToConsole = log(console.log);
 
-export const fontWeights = values(FONT_WEIGHTS);
-export const fontStyles = values(FONT_STYLES);
-
-export const isValidFontWeight = flip(contains)(fontWeights);
-export const isValidFontStyle = flip(contains)(fontStyles);
+export const isValidFontWeight = flip(contains)(VALID_WEIGHT_VALUES);
+export const isValidFontStyle = flip(contains)(VALID_STYLE_VALUES);
 
 export const propValue = prop(`value`);
