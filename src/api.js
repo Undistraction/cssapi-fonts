@@ -1,5 +1,16 @@
+import { lensProp, map, view, contains, flip } from 'ramda';
+import { contained } from './utils';
+
 export default config => {
-  const f = name => 
+  const lFamily = lensProp(`family`);
+
+  const allFamilies = map(view(lFamily), config.fonts);
+  const hasFamily = contained(allFamilies);
+
+  console.log(`Config`, config);
+  console.log(`Families`, allFamilies);
+
+  const f = name =>
     // Check that name is valid
 
     // Check if each arg is a validFontWeight()
@@ -14,12 +25,11 @@ export default config => {
 
     // Build the font stack by combining name with fallbacks.
 
-     ({
+    ({
       // 'font-family': fontStack,
       // 'font-weight': fontWeight,
       // 'font-style': fontStyle,
-    })
-  ;
+    });
 
   const offsetForFace = name => {};
 

@@ -29,3 +29,5 @@ export const isValidFontWeight = flip(contains)(VALID_WEIGHT_VALUES);
 export const isValidFontStyle = flip(contains)(VALID_STYLE_VALUES);
 
 export const propValue = prop(`value`);
+
+export const contained = flip(contains);
