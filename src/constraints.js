@@ -7,10 +7,11 @@ import {
   validateIsArray,
   validateIsWhitelistedString,
   validateIsObject,
+  orValidator,
 } from 'folktale-validations';
 import { VALID_WEIGHT_VALUES, VALID_STYLE_VALUES } from './const';
 
-export default {
+export const CONFIG = {
   fields: [
     {
       name: `fonts`,
@@ -73,6 +74,32 @@ export default {
           },
         ],
       },
+    },
+  ],
+};
+
+export const API_F = {
+  fields: [
+    {
+      name: `family`,
+      validator: validateIsString,
+    },
+    {
+      name: `weight`,
+      validator: orValidator(validateIsString, validateIsValidNumber),
+    },
+    {
+      name: `style`,
+      validator: validateIsString,
+    },
+  ],
+};
+
+export const API_OFFSET = {
+  fields: [
+    {
+      name: `family`,
+      validator: validateIsString,
     },
   ],
 };

@@ -29,7 +29,7 @@ export const VALID_WEIGHT_VALUES = concat(
   VALID_NUMERIC_WEIGHTS
 );
 
-export const FIELDS = Object.freeze({
+export const FIELD_NAMES = Object.freeze({
   FONTS: `fonts`,
   FAMILY: `family`,
   FALLBACKS: `fallbacks`,
@@ -38,4 +38,16 @@ export const FIELDS = Object.freeze({
   NAME: `name`,
   WEIGHT: `weight`,
   STYLES: `styles`,
+  STYLE: `style`,
 });
+
+export const STYLES = Object.freeze({
+  FONT_FAMILY: `font-family`,
+  FONT_WEIGHT: `font-weight`,
+  FONT_STYLE: `font-style`,
+});
+
+export const ERROR_PREFIX = `[css-js-fonts]`;
+export const CONFIGURE_PREFIX = `configure()`;
+export const API_FONT_PREFIX = `font()`;
+export const API_OFFSET_PREFIX = `offset()`;

@@ -1,40 +1,100 @@
-import { lensProp, map, view, contains, flip } from 'ramda';
-import { contained } from './utils';
+import { lensProp, view, flip, find, compose, when, prop } from 'ramda';
+import { lensEq, isUndefined } from 'ramda-adjunct';
+import { joinWithComma } from './utils';
+import {
+  throwAPIFontError,
+  throwAPIOffsetError,
+  noFontFamilyMessage,
+  noWeightForFontFamilyMessage,
+  invalidAPIMessage,
+  noStyleForWeightForFontFamilyMessage,
+} from './errors';
+import { FIELD_NAMES, STYLES } from './const';
+import validateAPIArgs from './validators/validateAPIArgs';
+import validateAPIOffsetArgs from './validators/validateAPIOffsetArgs';
+
+const propFamily = prop(FIELD_NAMES.FAMILY);
+const propWeight = prop(FIELD_NAMES.WEIGHT);
+const propBaselineOffset = prop(FIELD_NAMES.BASELINE_OFFSET);
+const propStyle = prop(FIELD_NAMES.STYLE);
+const lFamily = lensProp(FIELD_NAMES.FAMILY);
+const lWeights = lensProp(FIELD_NAMES.WEIGHTS);
+const lWeight = lensProp(FIELD_NAMES.WEIGHT);
+const lStyles = lensProp(FIELD_NAMES.STYLES);
+const lStyle = lensProp(FIELD_NAMES.STYLE);
+const lFallbacks = lensProp(FIELD_NAMES.FALLBACKS);
+const lEqualsFamily = lensEq(lFamily);
+const lEqualsWeight = lensEq(lWeight);
+const lEqualsStyle = lensEq(lStyle);
 
 export default config => {
-  const lFamily = lensProp(`family`);
+  const { fonts } = config;
+  const findFont = flip(find)(fonts);
+  const findFontFamily = compose(findFont, lEqualsFamily);
 
-  const allFamilies = map(view(lFamily), config.fonts);
-  const hasFamily = contained(allFamilies);
+  // ---------------------------------------------------------------------------
+  // font()
+  // ---------------------------------------------------------------------------
 
-  console.log(`Config`, config);
-  console.log(`Families`, allFamilies);
+  const font = (family, weight, style) => {
+    validateAPIArgs({ family, weight, style }).orElse(
+      compose(throwAPIFontError, invalidAPIMessage)
+    );
 
-  const f = name =>
-    // Check that name is valid
+    // Family
+    const fontFamily = findFontFamily(family); // Check that name is valid
+    when(isUndefined, _ => throwAPIFontError(noFontFamilyMessage(family)))(
+      fontFamily
+    );
 
-    // Check if each arg is a validFontWeight()
-    // If more than one is, error 'You have supplied more than one font weight';
-    // If none are, try a lookup with 'regular' and 'normal';
-    // If one is, try a lookup with it.
+    // Weights
+    const fontWeights = view(lWeights, fontFamily);
+    const fontWeight = find(lEqualsWeight(weight), fontWeights);
+    when(isUndefined, _ =>
+      throwAPIFontError(noWeightForFontFamilyMessage(family, weight))
+    )(fontWeight);
 
-    // Check if each arg is a validFontStyle()
-    // If more than one is, error 'You have supplied more than one font style';
-    // If none are, try a lookup with 'regular' and 'normal';
-    // If one is, try a lookup with it.
+    // Styles
+    const fontStyles = view(lStyles, fontWeight);
+    const fontStyle = find(lEqualsStyle(style), fontStyles);
+    when(isUndefined, _ =>
+      throwAPIFontError(
+        noStyleForWeightForFontFamilyMessage(family, weight, style)
+      )
+    )(fontStyle);
 
-    // Build the font stack by combining name with fallbacks.
+    // Build Stack
+    const fontStack = joinWithComma([
+      propFamily(fontFamily),
+      joinWithComma(view(lFallbacks, fontFamily)),
+    ]);
 
-    ({
-      // 'font-family': fontStack,
-      // 'font-weight': fontWeight,
-      // 'font-style': fontStyle,
-    });
+    return {
+      [STYLES.FONT_FAMILY]: fontStack,
+      [STYLES.FONT_WEIGHT]: propWeight(fontWeight),
+      [STYLES.FONT_STYLE]: propStyle(fontStyle),
+    };
+  };
 
-  const offsetForFace = name => {};
+  // ---------------------------------------------------------------------------
+  // offset()
+  // ---------------------------------------------------------------------------
+
+  const offset = family => {
+    validateAPIOffsetArgs({ family }).orElse(
+      compose(throwAPIOffsetError, invalidAPIMessage)
+    );
+
+    const fontFamily = findFontFamily(family); // Check that name is valid
+
+    when(isUndefined, _ => throwAPIOffsetError(noFontFamilyMessage(family)))(
+      fontFamily
+    );
+    return propBaselineOffset(fontFamily);
+  };
 
   return {
-    f,
-    offsetForFace,
+    font,
+    offset,
   };
 };

@@ -1,4 +1,4 @@
 import { validateObjectWithConstraints } from 'folktale-validations';
-import CONSTRAINTS from '../constraints';
+import { CONFIG } from '../constraints';
 
-export default validateObjectWithConstraints(CONSTRAINTS);
+export default validateObjectWithConstraints(CONFIG);
