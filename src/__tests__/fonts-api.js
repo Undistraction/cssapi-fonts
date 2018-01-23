@@ -18,7 +18,7 @@ describe(`api`, () => {
         it(`throws`, () => {
           const fts = fonts.configure(minimumValidConfig());
           expect(() => fts.font()).toThrow(
-            `[css-js-fonts] font() You supplied invalid Arguments: Argument 'family': Wasn't type: 'String', Argument 'weight': Wasn't type: 'String' and Wasn't a valid Number, Argument 'style': Wasn't type: 'String'`
+            `[cssjs-fonts] font() You supplied invalid Arguments: Argument 'family': Wasn't type: 'String', Argument 'weight': Wasn't type: 'String' and Wasn't a valid Number, Argument 'style': Wasn't type: 'String'`
           );
         });
       });
@@ -27,7 +27,7 @@ describe(`api`, () => {
         it(`throws`, () => {
           const fts = fonts.configure(minimumValidConfig());
           expect(() => fts.font(`a`)).toThrow(
-            `[css-js-fonts] font() You supplied invalid Arguments: Argument 'weight': Wasn't type: 'String' and Wasn't a valid Number, Argument 'style': Wasn't type: 'String'`
+            `[cssjs-fonts] font() You supplied invalid Arguments: Argument 'weight': Wasn't type: 'String' and Wasn't a valid Number, Argument 'style': Wasn't type: 'String'`
           );
         });
       });
@@ -36,7 +36,7 @@ describe(`api`, () => {
         it(`throws`, () => {
           const fts = fonts.configure(minimumValidConfig());
           expect(() => fts.font(`a`, `bold`)).toThrow(
-            `[css-js-fonts] font() You supplied invalid Arguments: Argument 'style': Wasn't type: 'String'`
+            `[cssjs-fonts] font() You supplied invalid Arguments: Argument 'style': Wasn't type: 'String'`
           );
         });
       });
@@ -46,7 +46,7 @@ describe(`api`, () => {
           map(invalidValue => {
             const fts = fonts.configure(minimumValidConfig());
             expect(() => fts.font(invalidValue, `bold`, `normal`)).toThrow(
-              `[css-js-fonts] font() You supplied invalid Arguments: Argument 'family': Wasn't type: 'String'`
+              `[cssjs-fonts] font() You supplied invalid Arguments: Argument 'family': Wasn't type: 'String'`
             );
           })(notString);
         });
@@ -57,7 +57,7 @@ describe(`api`, () => {
           map(invalidValue => {
             const fts = fonts.configure(minimumValidConfig());
             expect(() => fts.font(`a`, invalidValue, `normal`)).toThrow(
-              `[css-js-fonts] font() You supplied invalid Arguments: Argument 'weight': Wasn't type: 'String' and Wasn't a valid Number`
+              `[cssjs-fonts] font() You supplied invalid Arguments: Argument 'weight': Wasn't type: 'String' and Wasn't a valid Number`
             );
           })(notStringOrNumber);
         });
@@ -68,7 +68,7 @@ describe(`api`, () => {
           map(invalidValue => {
             const fts = fonts.configure(minimumValidConfig());
             expect(() => fts.font(`a`, `bold`, invalidValue)).toThrow(
-              `[css-js-fonts] font() You supplied invalid Arguments: Argument 'style': Wasn't type: 'String'`
+              `[cssjs-fonts] font() You supplied invalid Arguments: Argument 'style': Wasn't type: 'String'`
             );
           })(notString);
         });
@@ -84,7 +84,7 @@ describe(`api`, () => {
         it(`throws`, () => {
           const fts = fonts.configure(minimumValidConfig());
           expect(() => fts.font(`invalidFamily`, `normal`, `italic`)).toThrow(
-            `[css-js-fonts] font() There is no font family named 'invalidFamily' configured`
+            `[cssjs-fonts] font() There is no font family named 'invalidFamily' configured`
           );
         });
       });
@@ -93,7 +93,7 @@ describe(`api`, () => {
         it(`throws`, () => {
           const fts = fonts.configure(minimumValidConfig());
           expect(() => fts.font(`validFamily1`, `invalid`, `italic`)).toThrow(
-            `[css-js-fonts] font() There is no weight 'invalid' for font family named 'validFamily1' configured`
+            `[cssjs-fonts] font() There is no weight 'invalid' for font family named 'validFamily1' configured`
           );
         });
       });
@@ -102,7 +102,7 @@ describe(`api`, () => {
         it(`throws`, () => {
           const fts = fonts.configure(minimumValidConfig());
           expect(() => fts.font(`validFamily1`, `normal`, `invalid`)).toThrow(
-            `[css-js-fonts] font() There is no style 'invalid' for weight 'normal' for font family named 'validFamily1' configured`
+            `[cssjs-fonts] font() There is no style 'invalid' for weight 'normal' for font family named 'validFamily1' configured`
           );
         });
       });
@@ -137,7 +137,7 @@ describe(`api`, () => {
         it(`throws`, () => {
           const fts = fonts.configure(minimumValidConfig());
           expect(() => fts.offset()).toThrow(
-            `[css-js-fonts] offset() You supplied invalid Arguments: Argument 'family': Wasn't type: 'String'`
+            `[cssjs-fonts] offset() You supplied invalid Arguments: Argument 'family': Wasn't type: 'String'`
           );
         });
       });
@@ -147,7 +147,7 @@ describe(`api`, () => {
           map(invalidValue => {
             const fts = fonts.configure(minimumValidConfig());
             expect(() => fts.offset(invalidValue)).toThrow(
-              `[css-js-fonts] offset() You supplied invalid Arguments: Argument 'family': Wasn't type: 'String'`
+              `[cssjs-fonts] offset() You supplied invalid Arguments: Argument 'family': Wasn't type: 'String'`
             );
           })(notString);
         });
@@ -159,7 +159,7 @@ describe(`api`, () => {
         it(`throws`, () => {
           const fts = fonts.configure(minimumValidConfig());
           expect(() => fts.offset(`invalidFamily`)).toThrow(
-            `[css-js-fonts] offset() There is no font family named 'invalidFamily' configured`
+            `[cssjs-fonts] offset() There is no font family named 'invalidFamily' configured`
           );
         });
       });

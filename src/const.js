@@ -47,7 +47,7 @@ export const STYLES = Object.freeze({
   FONT_STYLE: `font-style`,
 });
 
-export const ERROR_PREFIX = `[css-js-fonts]`;
+export const ERROR_PREFIX = `[cssjs-fonts]`;
 export const CONFIGURE_PREFIX = `configure()`;
 export const API_FONT_PREFIX = `font()`;
 export const API_OFFSET_PREFIX = `offset()`;

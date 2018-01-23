@@ -1,4 +1,5 @@
 import { lensProp, view, flip, find, compose, when, prop } from 'ramda';
+import { result as Result } from 'folktale';
 import { lensEq, isUndefined } from 'ramda-adjunct';
 import { joinWithComma } from './utils';
 import {
@@ -63,14 +64,11 @@ export default config => {
       )
     )(fontStyle);
 
-    // Build Stack
-    const fontStack = joinWithComma([
-      propFamily(fontFamily),
-      joinWithComma(view(lFallbacks, fontFamily)),
-    ]);
-
     return {
-      [STYLES.FONT_FAMILY]: fontStack,
+      [STYLES.FONT_FAMILY]: joinWithComma([
+        propFamily(fontFamily),
+        joinWithComma(view(lFallbacks, fontFamily)),
+      ]),
       [STYLES.FONT_WEIGHT]: propWeight(fontWeight),
       [STYLES.FONT_STYLE]: propStyle(fontStyle),
     };

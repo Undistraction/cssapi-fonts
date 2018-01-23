@@ -12,9 +12,7 @@ import {
   view,
   reject,
   isEmpty,
-  either,
   both,
-  any,
   anyPass,
   replace,
 } from 'ramda';
