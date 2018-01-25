@@ -1,10 +1,10 @@
 {
-  "name": "cssjs-fonts",
+  "name": "cssapi-fonts",
   "version": "0.0.1",
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Undistraction/cssjs-fonts.git"
+    "url": "git+https://github.com/Undistraction/cssapi-fonts.git"
   },
   "files": [
     "dist",
@@ -15,9 +15,9 @@
   "author": "Pedr Browne",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Undistraction/cssjs-fonts/issues"
+    "url": "https://github.com/Undistraction/cssapi-fonts/issues"
   },
-  "homepage": "https://github.com/Undistraction/cssjs-fonts",
+  "homepage": "https://github.com/Undistraction/cssapi-fonts",
   "scripts": {
     "build": "npm run build:lib && npm run build:dist",
     "prebuild:lib": "rimraf lib/*",
@@ -59,8 +59,9 @@
     "rollup-plugin-node-resolve": "^3.0.0"
   },
   "dependencies": {
+    "cssapi-units": "^0.3.0",
     "folktale": "^2.0.1",
-    "folktale-validations": "^0.0.43",
+    "folktale-validations": "^0.0.45",
     "ramda": "^0.25.0",
     "ramda-adjunct": "^2.1.0"
   }

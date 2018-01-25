@@ -7,6 +7,10 @@ import {
   API_OFFSET_PREFIX,
 } from './const';
 
+// -----------------------------------------------------------------------------
+// Utils
+// -----------------------------------------------------------------------------
+
 const throwError = message => {
   throw new Error(joinWithSpace([ERROR_PREFIX, message]));
 };
@@ -14,9 +18,17 @@ const throwError = message => {
 const throwPrefixedError = prefix =>
   compose(throwError, joinWithSpace, flip(append)([prefix]));
 
+// -----------------------------------------------------------------------------
+// Prefixed Errors
+// -----------------------------------------------------------------------------
+
 export const throwConfigureError = throwPrefixedError(CONFIGURE_PREFIX);
 export const throwAPIFontError = throwPrefixedError(API_FONT_PREFIX);
 export const throwAPIOffsetError = throwPrefixedError(API_OFFSET_PREFIX);
+
+// -----------------------------------------------------------------------------
+// Messages
+// -----------------------------------------------------------------------------
 
 export const invalidConfigMessage = validationErrors =>
   `The config object was invalid: ${joinWithComma(validationErrors)}`;
