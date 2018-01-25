@@ -3,10 +3,10 @@ import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 
 export default {
-  name: `cssjs-fonts`,
+  name: `cssapi-fonts`,
   input: `src/index.js`,
   output: {
-    file: `dist/cssjs-fonts.js`,
+    file: `dist/cssapi-fonts.js`,
     format: `umd`,
   },
   // Define modules that shouldn't be included in the build. It is assumed they
@@ -34,6 +34,22 @@ export default {
       ],
     }),
     // Allow CommonJS modules to be included in build.
-    commonjs(),
+    commonjs({
+      namedExports: {
+        'node_modules/folktale-validations/lib/index.js': [
+          `validateIsObject`,
+          `validateObjectWithConstraints`,
+          `validateIsArrayOf`,
+          `validateIsString`,
+          `validateIsValidNumber`,
+          `andValidator`,
+          `validateIsArray`,
+          `validateIsNotEmpty`,
+          `validateIsWhitelistedString`,
+          `orValidator`,
+        ],
+        'node_modules/folktale/index.js': [`validation`],
+      },
+    }),
   ],
 };
