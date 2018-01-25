@@ -8,7 +8,7 @@ describe(`configuration rhythm()`, () => {
   describe(`with no config`, () => {
     it(`throws`, () => {
       expect(() => fonts.configure()).toThrow(
-        `[cssjs-fonts] configure() The config object was invalid: Wasn't type: 'Object'`
+        `[cssapi-fonts] configure() The config object was invalid: Wasn't type: 'Object'`
       );
     });
   });
@@ -18,7 +18,7 @@ describe(`configuration rhythm()`, () => {
       it(`throws`, () => {
         map(invalidValue => {
           expect(() => fonts.configure(invalidValue)).toThrow(
-            `[cssjs-fonts] configure() The config object was invalid: Wasn't type: 'Object'`
+            `[cssapi-fonts] configure() The config object was invalid: Wasn't type: 'Object'`
           );
         }, notObject);
       });
@@ -28,7 +28,7 @@ describe(`configuration rhythm()`, () => {
       it(`throws`, () => {
         const value = { a: 1, b: 2 };
         expect(() => fonts.configure(value)).toThrow(
-          `[cssjs-fonts] configure() The config object was invalid: Object Invalid: Object included invalid key(s): '[a, b]`
+          `[cssapi-fonts] configure() The config object was invalid: Object Invalid: Object included invalid key(s): '[a, b]`
         );
       });
     });
@@ -39,7 +39,7 @@ describe(`configuration rhythm()`, () => {
           fonts: [{ family: [], fallbacks: `x`, weights: [] }],
         };
         expect(() => fonts.configure(value)).toThrow(
-          `[cssjs-fonts] configure() The config object was invalid: Object Invalid: for field 'fonts': Object included invalid values(s): Key 'family': Wasn't type: 'String', Key 'fallbacks': Wasn't type: 'Array', Key 'weights': Was Empty`
+          `[cssapi-fonts] configure() The config object was invalid: Object Invalid: for field 'fonts': Object included invalid values(s): Key 'family': Wasn't type: 'String', Key 'fallbacks': Wasn't type: 'Array', Key 'weights': Was Empty`
         );
       });
     });

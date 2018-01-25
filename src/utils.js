@@ -57,19 +57,22 @@ export const hasView = lens => compose(isNotUndefined, view(lens));
 // -----------------------------------------------------------------------------
 
 export const contained = flip(contains);
-export const joinDefined = s => v => {
-  const remaining = reject(anyPass([isEmptyString, isEmptyArray, isUndefined]))(
-    v
-  );
-  const result = join(s, remaining);
-  return result;
-};
+export const appendTo = flip(append);
 
 // -----------------------------------------------------------------------------
 // Strings
 // -----------------------------------------------------------------------------
 
 export const quote = value => `'${value}'`;
+
+export const joinDefined = string => a => {
+  const remaining = reject(anyPass([isEmptyString, isEmptyArray, isUndefined]))(
+    a
+  );
+  const result = join(string, remaining);
+  return result;
+};
+
 export const joinWithComma = joinDefined(`, `);
 export const joinWithColon = joinDefined(`: `);
 export const joinWithSpace = joinDefined(` `);

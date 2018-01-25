@@ -78,7 +78,7 @@ export const CONFIG = {
   ],
 };
 
-export const API_F = {
+export const API_FONT = {
   fields: [
     {
       name: `family`,

@@ -42,12 +42,12 @@ export const FIELD_NAMES = Object.freeze({
 });
 
 export const STYLES = Object.freeze({
-  FONT_FAMILY: `font-family`,
-  FONT_WEIGHT: `font-weight`,
-  FONT_STYLE: `font-style`,
+  FONT_FAMILY: `fontFamily`,
+  FONT_WEIGHT: `fontWeight`,
+  FONT_STYLE: `fontStyle`,
 });
 
-export const ERROR_PREFIX = `[cssjs-fonts]`;
+export const ERROR_PREFIX = `[cssapi-fonts]`;
 export const CONFIGURE_PREFIX = `configure()`;
 export const API_FONT_PREFIX = `font()`;
 export const API_OFFSET_PREFIX = `offset()`;

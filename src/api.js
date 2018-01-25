@@ -1,5 +1,4 @@
 import { lensProp, view, flip, find, compose, when, prop } from 'ramda';
-import { result as Result } from 'folktale';
 import { lensEq, isUndefined } from 'ramda-adjunct';
 import { joinWithComma } from './utils';
 import {

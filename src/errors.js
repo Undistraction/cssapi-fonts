@@ -1,5 +1,5 @@
-import { compose, append, flip } from 'ramda';
-import { quote, joinWithSpace, joinWithComma } from './utils';
+import { compose } from 'ramda';
+import { quote, joinWithSpace, joinWithComma, appendTo } from './utils';
 import {
   ERROR_PREFIX,
   API_FONT_PREFIX,
@@ -16,7 +16,7 @@ const throwError = message => {
 };
 
 const throwPrefixedError = prefix =>
-  compose(throwError, joinWithSpace, flip(append)([prefix]));
+  compose(throwError, joinWithSpace, appendTo([prefix]));
 
 // -----------------------------------------------------------------------------
 // Prefixed Errors
