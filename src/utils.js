@@ -1,10 +1,8 @@
 import {
-  curry,
   join,
   compose,
   flip,
   append,
-  tap,
   equals,
   complement,
   contains,
@@ -15,22 +13,10 @@ import {
   both,
   anyPass,
   replace,
+  pickBy,
 } from 'ramda';
 import { isNotUndefined, isUndefined, isArray, isString } from 'ramda-adjunct';
 import { VALID_WEIGHT_VALUES, VALID_STYLE_VALUES } from './const';
-
-// -----------------------------------------------------------------------------
-// Logging
-// -----------------------------------------------------------------------------
-
-const log = curry((loggingFunction, prefix) =>
-  tap(
-    compose(loggingFunction, join(`: `), flip(append)([prefix]), JSON.stringify)
-  )
-);
-
-// eslint-disable-next-line no-console
-export const logToConsole = log(console.log);
 
 // -----------------------------------------------------------------------------
 // Predicates
@@ -84,3 +70,9 @@ export const joinWithSpace = joinDefined(` `);
 export const replaceValidationPrefix = replace(
   `Object Invalid: Object included invalid values(s)`
 );
+
+// ---------------------------------------------------------------------------
+// Other
+// ---------------------------------------------------------------------------
+
+export const pickIsNotUndefined = pickBy(isNotUndefined);

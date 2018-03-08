@@ -12,14 +12,13 @@ export const allValues = [
   false,
 ];
 
-export const notObject = [
+export const notObjectOrUndefined = [
   [],
   function() {},
   /x/,
   `x`,
   1,
   null,
-  undefined,
   NaN,
   true,
   false,

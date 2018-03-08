@@ -6,7 +6,6 @@ import {
   throwAPIOffsetError,
   noFontFamilyMessage,
   noWeightForFontFamilyMessage,
-  invalidAPIMessage,
   noStyleForWeightForFontFamilyMessage,
 } from './errors';
 import { FIELD_NAMES, STYLES } from './const';
@@ -37,9 +36,7 @@ export default config => {
   // ---------------------------------------------------------------------------
 
   const font = (family, weight, style) => {
-    validateAPIArgs({ family, weight, style }).orElse(
-      compose(throwAPIFontError, invalidAPIMessage)
-    );
+    validateAPIArgs({ family, weight, style }).orElse(throwAPIFontError);
 
     // Family
     const fontFamily = findFontFamily(family); // Check that name is valid
@@ -78,9 +75,7 @@ export default config => {
   // ---------------------------------------------------------------------------
 
   const offset = family => {
-    validateAPIOffsetArgs({ family }).orElse(
-      compose(throwAPIOffsetError, invalidAPIMessage)
-    );
+    validateAPIOffsetArgs({ family }).orElse(throwAPIOffsetError);
 
     const fontFamily = findFontFamily(family); // Check that name is valid
 

@@ -1,4 +1,6 @@
-import { compose } from 'ramda';
+import { compose, when } from 'ramda';
+import { isPlainObject } from 'ramda-adjunct';
+import { defaultRenderers } from 'folktale-validations';
 import { quote, joinWithSpace, joinWithComma, appendTo } from './utils';
 import {
   ERROR_PREFIX,
@@ -6,6 +8,8 @@ import {
   CONFIGURE_PREFIX,
   API_OFFSET_PREFIX,
 } from './const';
+
+const { argumentsFailureRenderer } = defaultRenderers;
 
 // -----------------------------------------------------------------------------
 // Utils
@@ -15,16 +19,25 @@ const throwError = message => {
   throw new Error(joinWithSpace([ERROR_PREFIX, message]));
 };
 
-const throwPrefixedError = prefix =>
+const throwErrorWithPrefixedMessage = prefix =>
   compose(throwError, joinWithSpace, appendTo([prefix]));
 
 // -----------------------------------------------------------------------------
 // Prefixed Errors
 // -----------------------------------------------------------------------------
 
-export const throwConfigureError = throwPrefixedError(CONFIGURE_PREFIX);
-export const throwAPIFontError = throwPrefixedError(API_FONT_PREFIX);
-export const throwAPIOffsetError = throwPrefixedError(API_OFFSET_PREFIX);
+export const throwConfigureError = compose(
+  throwErrorWithPrefixedMessage(CONFIGURE_PREFIX),
+  argumentsFailureRenderer
+);
+export const throwAPIFontError = compose(
+  throwErrorWithPrefixedMessage(API_FONT_PREFIX),
+  when(isPlainObject, argumentsFailureRenderer)
+);
+export const throwAPIOffsetError = compose(
+  throwErrorWithPrefixedMessage(API_OFFSET_PREFIX),
+  when(isPlainObject, argumentsFailureRenderer)
+);
 
 // -----------------------------------------------------------------------------
 // Messages

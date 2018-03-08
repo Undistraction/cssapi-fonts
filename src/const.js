@@ -51,3 +51,7 @@ export const ERROR_PREFIX = `[cssapi-fonts]`;
 export const CONFIGURE_PREFIX = `configure()`;
 export const API_FONT_PREFIX = `font()`;
 export const API_OFFSET_PREFIX = `offset()`;
+
+export const CONFIGURATION_ARG_NAMES = Object.freeze({
+  CONFIG: `config`,
+});

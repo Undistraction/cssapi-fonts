@@ -5,37 +5,44 @@ import { notString, notStringOrNumber } from '../testHelpers/fixtures';
 
 describe(`fonts().font()`, () => {
   describe(`with missing args`, () => {
-    const fts = fonts.configure(minimumValidConfig());
+    const fts = fonts(minimumValidConfig());
     describe(`with no args`, () => {
       it(`throws`, () => {
         expect(() => fts.font()).toThrowMultiline(`
-          [cssapi-fonts] font() You supplied invalid Arguments: Argument 'family': Wasn't type: 'String', Argument 'weight': Wasn't type: 'String' and Wasn't a valid Number, Argument 'style': Wasn't type: 'String'`);
+          [cssapi-fonts] font() Arguments included invalid value(s)
+            – Key 'family': Wasn't String
+            – Key 'weight': Wasn't String or Wasn't Valid Number
+            – Key 'style': Wasn't String`);
       });
     });
 
     describe(`with missing 'weight' and 'style'`, () => {
       it(`throws`, () => {
         expect(() => fts.font(`a`)).toThrowMultiline(`
-          [cssapi-fonts] font() You supplied invalid Arguments: Argument 'weight': Wasn't type: 'String' and Wasn't a valid Number, Argument 'style': Wasn't type: 'String'`);
+          [cssapi-fonts] font() Arguments included invalid value(s)
+            – Key 'weight': Wasn't String or Wasn't Valid Number
+            – Key 'style': Wasn't String`);
       });
     });
 
     describe(`with missing 'style'`, () => {
       it(`throws`, () => {
         expect(() => fts.font(`a`, `bold`)).toThrowMultiline(`
-          [cssapi-fonts] font() You supplied invalid Arguments: Argument 'style': Wasn't type: 'String'`);
+        [cssapi-fonts] font() Arguments included invalid value(s)
+          – Key 'style': Wasn't String`);
       });
     });
   });
 
   describe(`with invalid args`, () => {
-    const fts = fonts.configure(minimumValidConfig());
+    const fts = fonts(minimumValidConfig());
     describe(`'family'`, () => {
       it(`throws`, () => {
         map(invalidValue => {
           expect(() => fts.font(invalidValue, `bold`, `normal`))
             .toThrowMultiline(`
-            [cssapi-fonts] font() You supplied invalid Arguments: Argument 'family': Wasn't type: 'String'`);
+            [cssapi-fonts] font() Arguments included invalid value(s)
+              – Key 'family': Wasn't String`);
         })(notString);
       });
     });
@@ -44,7 +51,8 @@ describe(`fonts().font()`, () => {
       it(`throws`, () => {
         map(invalidValue => {
           expect(() => fts.font(`a`, invalidValue, `normal`)).toThrowMultiline(`
-            [cssapi-fonts] font() You supplied invalid Arguments: Argument 'weight': Wasn't type: 'String' and Wasn't a valid Number`);
+            [cssapi-fonts] font() Arguments included invalid value(s)
+              – Key 'weight': Wasn't String or Wasn't Valid Number`);
         })(notStringOrNumber);
       });
     });
@@ -53,19 +61,20 @@ describe(`fonts().font()`, () => {
       it(`throws`, () => {
         map(invalidValue => {
           expect(() => fts.font(`a`, `bold`, invalidValue)).toThrowMultiline(`
-            [cssapi-fonts] font() You supplied invalid Arguments: Argument 'style': Wasn't type: 'String'`);
+          [cssapi-fonts] font() Arguments included invalid value(s)
+            – Key 'style': Wasn't String`);
         })(notString);
       });
     });
   });
 
   describe(`with valid args`, () => {
-    const fts = fonts.configure(minimumValidConfig());
+    const fts = fonts(minimumValidConfig());
     describe(`which don't resolve to a font`, () => {
       it(`throws`, () => {
         expect(() => fts.font(`invalidFamily`, `normal`, `italic`))
           .toThrowMultiline(`
-              [cssapi-fonts] font() There is no font family named 'invalidFamily' configured`);
+            [cssapi-fonts] font() There is no font family named 'invalidFamily' configured`);
       });
     });
 
@@ -73,7 +82,7 @@ describe(`fonts().font()`, () => {
       it(`throws`, () => {
         expect(() => fts.font(`validFamily1`, `invalid`, `italic`))
           .toThrowMultiline(`
-          [cssapi-fonts] font() There is no weight 'invalid' for font family named 'validFamily1' configured`);
+            [cssapi-fonts] font() There is no weight 'invalid' for font family named 'validFamily1' configured`);
       });
     });
 
@@ -81,14 +90,14 @@ describe(`fonts().font()`, () => {
       it(`throws`, () => {
         expect(() => fts.font(`validFamily1`, `normal`, `invalid`))
           .toThrowMultiline(`
-          [cssapi-fonts] font() There is no style 'invalid' for weight 'normal' for font family named 'validFamily1' configured`);
+            [cssapi-fonts] font() There is no style 'invalid' for weight 'normal' for font family named 'validFamily1' configured`);
       });
     });
   });
 
   describe(`which resolve`, () => {
     it(`returns the correct styles`, () => {
-      const fts = fonts.configure(multiFontConfig());
+      const fts = fonts(multiFontConfig());
 
       expect(fts.font(`validFamily1`, `normal`, `italic`)).toEqual({
         fontFamily: `validFamily1`,

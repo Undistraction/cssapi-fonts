@@ -5,9 +5,9 @@ import {
   andValidator,
   validateIsNotEmpty,
   validateIsArray,
-  validateIsWhitelistedString,
-  validateIsObject,
+  validateIsWhitelistedValue,
   orValidator,
+  validateIsPlainObject,
 } from 'folktale-validations';
 import { VALID_WEIGHT_VALUES, VALID_STYLE_VALUES } from './const';
 
@@ -16,7 +16,7 @@ export const CONFIG = {
     {
       name: `fonts`,
       isRequired: true,
-      validator: validateIsArrayOf(validateIsObject),
+      validator: validateIsArrayOf(validateIsPlainObject),
       children: {
         fields: [
           {
@@ -47,12 +47,12 @@ export const CONFIG = {
                 {
                   name: `weight`,
                   isRequired: true,
-                  validator: validateIsWhitelistedString(VALID_WEIGHT_VALUES),
+                  validator: validateIsWhitelistedValue(VALID_WEIGHT_VALUES),
                 },
                 {
                   name: `styles`,
                   isRequired: true,
-                  validator: validateIsArrayOf(validateIsObject),
+                  validator: validateIsArrayOf(validateIsPlainObject),
                   children: {
                     fields: [
                       {
@@ -62,7 +62,7 @@ export const CONFIG = {
                       {
                         name: `style`,
                         isRequired: true,
-                        validator: validateIsWhitelistedString(
+                        validator: validateIsWhitelistedValue(
                           VALID_STYLE_VALUES
                         ),
                       },
@@ -78,7 +78,18 @@ export const CONFIG = {
   ],
 };
 
-export const API_FONT = {
+export const FONTS_ARGS = {
+  fields: [
+    {
+      name: `config`,
+      validator: validateIsPlainObject,
+      isRequired: true,
+      value: CONFIG,
+    },
+  ],
+};
+
+export const API_FONT_ARGS = {
   fields: [
     {
       name: `family`,
@@ -95,7 +106,7 @@ export const API_FONT = {
   ],
 };
 
-export const API_OFFSET = {
+export const API_OFFSET_ARGS = {
   fields: [
     {
       name: `family`,
