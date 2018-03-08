@@ -8,9 +8,8 @@ describe(`fonts().offset()`, () => {
     describe(`with no args`, () => {
       it(`throws`, () => {
         const fts = fonts.configure(minimumValidConfig());
-        expect(() => fts.offset()).toThrow(
-          `[cssapi-fonts] offset() You supplied invalid Arguments: Argument 'family': Wasn't type: 'String'`
-        );
+        expect(() => fts.offset()).toThrowMultiline(`
+          [cssapi-fonts] offset() You supplied invalid Arguments: Argument 'family': Wasn't type: 'String'`);
       });
     });
   });
@@ -20,9 +19,8 @@ describe(`fonts().offset()`, () => {
       it(`throws`, () => {
         map(invalidValue => {
           const fts = fonts.configure(minimumValidConfig());
-          expect(() => fts.offset(invalidValue)).toThrow(
-            `[cssapi-fonts] offset() You supplied invalid Arguments: Argument 'family': Wasn't type: 'String'`
-          );
+          expect(() => fts.offset(invalidValue)).toThrowMultiline(`
+            [cssapi-fonts] offset() You supplied invalid Arguments: Argument 'family': Wasn't type: 'String'`);
         })(notString);
       });
     });
@@ -32,9 +30,8 @@ describe(`fonts().offset()`, () => {
     describe(`which don't resolve to a font`, () => {
       it(`throws`, () => {
         const fts = fonts.configure(minimumValidConfig());
-        expect(() => fts.offset(`invalidFamily`)).toThrow(
-          `[cssapi-fonts] offset() There is no font family named 'invalidFamily' configured`
-        );
+        expect(() => fts.offset(`invalidFamily`)).toThrowMultiline(`
+          [cssapi-fonts] offset() There is no font family named 'invalidFamily' configured`);
       });
     });
 

@@ -7,9 +7,8 @@ import { VALID_STRING_WEIGHTS, VALID_STYLES } from '../const';
 describe(`configuration rhythm()`, () => {
   describe(`with no config`, () => {
     it(`throws`, () => {
-      expect(() => fonts.configure()).toThrow(
-        `[cssapi-fonts] configure() The config object was invalid: Wasn't type: 'Object'`
-      );
+      expect(() => fonts.configure()).toThrowMultiline(`
+      [cssapi-fonts] configure() The config object was invalid: Wasn't type: 'Object'`);
     });
   });
 
@@ -17,9 +16,8 @@ describe(`configuration rhythm()`, () => {
     describe(`with an non-object`, () => {
       it(`throws`, () => {
         map(invalidValue => {
-          expect(() => fonts.configure(invalidValue)).toThrow(
-            `[cssapi-fonts] configure() The config object was invalid: Wasn't type: 'Object'`
-          );
+          expect(() => fonts.configure(invalidValue)).toThrowMultiline(`
+            [cssapi-fonts] configure() The config object was invalid: Wasn't type: 'Object'`);
         }, notObject);
       });
     });
@@ -27,9 +25,8 @@ describe(`configuration rhythm()`, () => {
     describe(`with invalid config param names`, () => {
       it(`throws`, () => {
         const value = { a: 1, b: 2 };
-        expect(() => fonts.configure(value)).toThrow(
-          `[cssapi-fonts] configure() The config object was invalid: Object Invalid: Object included invalid key(s): '[a, b]`
-        );
+        expect(() => fonts.configure(value)).toThrowMultiline(`
+          [cssapi-fonts] configure() The config object was invalid: Object Invalid: Object included invalid key(s): '[a, b]'`);
       });
     });
 
@@ -38,9 +35,8 @@ describe(`configuration rhythm()`, () => {
         const value = {
           fonts: [{ family: [], fallbacks: `x`, weights: [] }],
         };
-        expect(() => fonts.configure(value)).toThrow(
-          `[cssapi-fonts] configure() The config object was invalid: Object Invalid: for field 'fonts': Object included invalid values(s): Key 'family': Wasn't type: 'String', Key 'fallbacks': Wasn't type: 'Array', Key 'weights': Was Empty`
-        );
+        expect(() => fonts.configure(value)).toThrowMultiline(`
+          [cssapi-fonts] configure() The config object was invalid: Object Invalid: for field 'fonts': Object included invalid values(s): Key 'family': Wasn't type: 'String', Key 'fallbacks': Wasn't type: 'Array', Key 'weights': Was Empty`);
       });
     });
   });
