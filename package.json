@@ -65,5 +65,11 @@
     "folktale-validations": "^2.2.1",
     "ramda": "^0.25.0",
     "ramda-adjunct": "^2.1.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run verify"
+    }
   }
 }
