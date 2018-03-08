@@ -22,12 +22,15 @@
     "build:dist": "NODE_ENV=development rollup --config",
     "test": "jest --watch",
     "test:noWatch": "jest",
-    "prepublishOnly": "npm run build",
+    "test:cov": "open coverage/index.html",
+    "verify": "npm run lint && npm run test:noWatch && npm run build",
+    "prepublishOnly": "npm run verify",
     "publish:patch": "npm version patch && sudo npm publish",
     "publish:minor": "npm version minor && sudo npm publish",
     "publish:major": "npm version major && sudo npm publish",
     "lint": "eslint src",
-    "audit:packages": "yarn outdated || true"
+    "audit:packages": "yarn outdated || true",
+    "securityCheck": "nsp check"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
