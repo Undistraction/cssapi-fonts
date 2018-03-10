@@ -1,3 +1,3 @@
-import fonts from './fonts';
+import fonts from './fonts'
 
-export default fonts;
+export default fonts

@@ -6,7 +6,10 @@
     "type": "git",
     "url": "git+https://github.com/Undistraction/cssapi-fonts.git"
   },
-  "files": ["src", "lib"],
+  "files": [
+    "src",
+    "lib"
+  ],
   "keywords": [],
   "author": "Pedr Browne",
   "license": "MIT",
@@ -48,6 +51,7 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-ramda": "^2.5.0",
     "eslint-plugin-react": "^7.5.1",
     "husky": "^0.15.0-rc.8",
     "jasmine-multiline-matchers": "^0.2.0",

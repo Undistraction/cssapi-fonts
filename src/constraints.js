@@ -8,8 +8,8 @@ import {
   validateIsWhitelistedValue,
   orValidator,
   validateIsPlainObject,
-} from 'folktale-validations';
-import { VALID_WEIGHT_VALUES, VALID_STYLE_VALUES } from './const';
+} from 'folktale-validations'
+import { VALID_WEIGHT_VALUES, VALID_STYLE_VALUES } from './const'
 
 export const CONFIG = {
   fields: [
@@ -76,7 +76,7 @@ export const CONFIG = {
       },
     },
   ],
-};
+}
 
 export const FONTS_ARGS = {
   fields: [
@@ -87,7 +87,7 @@ export const FONTS_ARGS = {
       value: CONFIG,
     },
   ],
-};
+}
 
 export const API_FONT_ARGS = {
   fields: [
@@ -104,7 +104,7 @@ export const API_FONT_ARGS = {
       validator: validateIsString,
     },
   ],
-};
+}
 
 export const API_OFFSET_ARGS = {
   fields: [
@@ -113,4 +113,4 @@ export const API_OFFSET_ARGS = {
       validator: validateIsString,
     },
   ],
-};
+}
