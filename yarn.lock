@@ -1640,15 +1640,15 @@ flat-cache@^1.2.1:
     graceful-fs "^4.1.2"
     write "^0.2.1"
 
-folktale-validations@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/folktale-validations/-/folktale-validations-2.2.1.tgz#1e3897d38032004cbc5ceb89c3d2e672ed0f73a1"
+folktale-validations@^2.12.0:
+  version "2.12.0"
+  resolved "https://registry.yarnpkg.com/folktale-validations/-/folktale-validations-2.12.0.tgz#7b7cc4312751f0be41ea38de35792e711f77840e"
   dependencies:
     cssapi-units "^0.3.0"
     deep-freeze "^0.0.1"
     folktale "^2.0.1"
     ramda "^0.25.0"
-    ramda-adjunct "^2.5.0"
+    ramda-adjunct "^2.6.0"
     ramda-log "0.0.3"
 
 folktale@^2.0.1:
@@ -3162,6 +3162,10 @@ ramda-adjunct@^2.1.0, ramda-adjunct@^2.2.0:
 ramda-adjunct@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/ramda-adjunct/-/ramda-adjunct-2.5.0.tgz#50d7d74ca273731b05dcdda77d102bc57d7c1145"
+
+ramda-adjunct@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/ramda-adjunct/-/ramda-adjunct-2.6.0.tgz#ec71a0868054bd2b957ef6e5ab046a6c702fedf4"
 
 ramda-log@0.0.3, ramda-log@^0.0.3:
   version "0.0.3"

@@ -66,7 +66,7 @@
   "dependencies": {
     "cssapi-units": "^0.3.0",
     "folktale": "^2.0.1",
-    "folktale-validations": "^2.2.1",
+    "folktale-validations": "^2.12.0",
     "ramda": "^0.25.0",
     "ramda-adjunct": "^2.1.0"
   },
